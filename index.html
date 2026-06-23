@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Magendra Varman | AI Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,17 +12,22 @@
   --bg:#050814;
   --text:#e5e7eb;
   --muted:#9ca3af;
-  --card:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.1);
+
+  --glass: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.1);
 
   --c1:#6ee7ff;
   --c2:#a78bfa;
-  --c3:#34d399;
   --c4:#f472b6;
   --c5:#fbbf24;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, sans-serif;
+}
 
 body{
   background:var(--bg);
@@ -30,155 +35,164 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== COLORFUL AI BACKGROUND ===== */
-.bg{
+/* BACKGROUND CANVAS */
+#network{
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(circle at 10% 15%, rgba(110,231,255,0.10), transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(167,139,250,0.10), transparent 40%),
-    radial-gradient(circle at 50% 70%, rgba(244,114,182,0.08), transparent 45%),
-    radial-gradient(circle at 70% 90%, rgba(52,211,153,0.08), transparent 45%),
-    radial-gradient(circle at 30% 90%, rgba(251,191,36,0.06), transparent 45%);
-  filter:blur(45px);
   z-index:0;
+  opacity:0.35;
 }
 
-/* grid overlay */
+/* GRID */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:90px 90px;
-  opacity:0.08;
-  z-index:0;
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:0.05;
 }
 
-/* cursor glow */
+/* CURSOR GLOW */
 .glow{
   position:fixed;
-  width:420px;
-  height:420px;
+  width:450px;
+  height:450px;
   border-radius:50%;
   pointer-events:none;
-  background:radial-gradient(circle, rgba(110,231,255,0.15), transparent 60%);
-  filter:blur(50px);
+  background:radial-gradient(circle, rgba(110,231,255,0.25), transparent 60%);
+  filter:blur(60px);
   transform:translate(-50%,-50%);
   z-index:1;
 }
 
-/* container */
+/* CONTAINER */
 .container{
   position:relative;
   z-index:2;
-  max-width:950px;
+  max-width:1100px;
   margin:auto;
-  padding:70px 20px;
+  padding:80px 20px;
 }
 
-/* sections */
 section{
-  margin-bottom:55px;
+  margin-bottom:90px;
 }
 
-/* headings */
+/* HEADINGS */
 h1{
-  font-size:3.2rem;
+  font-size:3.8rem;
   background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4),var(--c5));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 h2{
-  font-size:1.6rem;
-  margin-bottom:12px;
+  font-size:1.8rem;
+  margin-bottom:18px;
   color:var(--c1);
 }
 
+/* TEXT */
 p{
   color:var(--muted);
-  line-height:1.7;
-  font-size:0.95rem;
+  line-height:1.8;
 }
 
-/* cards */
+/* CARD */
 .card{
-  background:var(--card);
+  background:var(--glass);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:20px;
-  margin-top:12px;
-  backdrop-filter:blur(12px);
-  transition:0.25s;
+  border-radius:16px;
+  padding:22px;
+  margin-top:15px;
+  backdrop-filter:blur(18px);
+  transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  border-color:transparent;
-  box-shadow:0 0 25px rgba(110,231,255,0.2);
+  transform:translateY(-6px);
+  box-shadow:0 0 35px rgba(110,231,255,0.15);
 }
 
-/* accent borders */
-.card.vbam{border-left:4px solid var(--c1);}
-.card.chempoint{border-left:4px solid var(--c2);}
-.card.cleargrc{border-left:4px solid var(--c4);}
-.card.sisl{border-left:4px solid var(--c5);}
-
-/* tag */
+/* TAG */
 .tag{
   display:inline-block;
-  margin-top:10px;
+  margin-top:12px;
   font-size:11px;
-  color:white;
-  padding:4px 10px;
+  padding:5px 10px;
   border-radius:20px;
   background:linear-gradient(90deg,var(--c1),var(--c2));
+  color:#000;
+  font-weight:600;
+}
+
+/* TIMELINE */
+.timeline{
+  border-left:2px solid rgba(255,255,255,0.1);
+  padding-left:22px;
+}
+
+.timeline-item{
+  margin-bottom:25px;
+  position:relative;
+}
+
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-30px;
+  top:6px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--c2);
+  box-shadow:0 0 15px var(--c2);
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<canvas id="network"></canvas>
 <div class="glow" id="glow"></div>
 
 <div class="container">
 
 <!-- HERO -->
 <section>
-<h1>Magendra Varman</h1>
-<p>Senior Software Engineer • .NET Core • Angular • Azure • System Architecture</p>
+  <h1>Magendra Varman</h1>
+  <p>Senior Software Engineer • .NET Core • Angular • Azure • System Architecture</p>
 
-<div class="card">
-6+ years of enterprise experience in designing scalable backend systems, financial engines,
-risk management platforms, and cloud-based distributed applications.
-<div class="tag">DDD • CQRS • Microservices • Azure • DevOps</div>
-</div>
+  <div class="card">
+    6+ years of experience designing and building enterprise-grade distributed systems, financial transaction engines,
+    compliance platforms, and cloud-native applications with scalable architecture.
+    <div class="tag">DDD • CQRS • Microservices • Azure • DevOps</div>
+  </div>
 </section>
 
 <!-- SUMMARY -->
 <section>
 <h2>Professional Summary</h2>
+
 <div class="card">
-Highly motivated Software Engineer with strong expertise in Microsoft technology stack.
+Highly motivated Software Engineer specializing in Microsoft technology stack and enterprise architecture.
 
-Experienced in designing enterprise-grade applications using:
+<br><br>
+Strong experience in designing and implementing:
+<br><br>
+• Domain Driven Design (DDD)<br>
+• CQRS Architecture<br>
+• Microservices-based systems<br>
+• RESTful APIs<br>
+• Secure authentication & authorization systems<br>
+• Cloud deployments using Microsoft Azure<br>
+• High-performance backend systems<br>
 
-• Domain Driven Design (DDD)  
-• CQRS Architecture  
-• Repository Pattern  
-• Dependency Injection  
-• Microservices  
-
-Strong experience in:
-• Backend system architecture  
-• REST API development  
-• Cloud deployment (Azure)  
-• Performance tuning  
-• Scalable distributed systems  
+<br>
+Focused on scalable, maintainable, and production-grade enterprise applications used in finance, compliance, and government sectors.
 </div>
 </section>
 
@@ -186,99 +200,117 @@ Strong experience in:
 <section>
 <h2>Professional Experience</h2>
 
-<div class="card vbam">
+<div class="timeline">
+
+<!-- VBAM -->
+<div class="timeline-item">
+<div class="card">
 <b>VBAM – Ana Data Consulting Pvt. Ltd.</b><br>
 Software Developer (May 2024 – Present)
 
-<p><b>Project: VBAM (Investment Transaction Engine)</b></p>
+<br><br>
+<b>Project: VBAM (Investment Transaction Engine)</b>
+
 <p>
 VBAM is a high-performance enterprise financial transaction engine used in global investment systems.
 It processes end-to-end lifecycle transactions with accuracy, scalability, and audit-level tracking.
 </p>
 
-<p><b>Responsibilities:</b></p>
-<p>
+<br><b>Responsibilities:</b><br>
 • Designed scalable REST APIs using .NET Core Web API<br>
 • Developed Angular-based dynamic UI modules<br>
-• Built SQL Server procedures for reconciliation & reporting<br>
+• Built SQL Server stored procedures for reconciliation & reporting<br>
 • Implemented state management architecture for enterprise workflows<br>
 • Optimized backend queries for high-volume transaction processing<br>
 • Integrated logging and monitoring for production systems<br>
-• Worked in Agile sprint-based delivery model
-</p>
+• Worked in Agile sprint-based delivery model<br>
 
-<p><b>Tech Stack:</b> .NET Core 6, Web API, Angular, Redux, SQL Server, DevExpress, GitLab</p>
+<br><b>Tech Stack:</b> .NET Core 6, Web API, Angular, Redux, SQL Server, DevExpress, GitLab
+</div>
 </div>
 
-<div class="card chempoint">
+<!-- CHEMPOINT -->
+<div class="timeline-item">
+<div class="card">
 <b>Aspire System India Pvt. Ltd.</b><br>
 Senior Developer (Apr 2023 – Apr 2024)
 
-<p><b>Project: ChemPoint (Enterprise Document Platform)</b></p>
+<br><br>
+<b>Project: ChemPoint (Enterprise Document Platform)</b>
+
 <p>
 ChemPoint is a secure enterprise document automation system designed for large-scale publishing workflows.
+It supports automated document processing, approvals, and cloud-based collaboration.
 </p>
 
-<p><b>Responsibilities:</b></p>
-<p>
+<br><b>Responsibilities:</b><br>
 • Designed microservices-based architecture for document processing<br>
 • Integrated React frontend with backend .NET Core APIs<br>
 • Implemented OAuth 2.0 authentication & authorization system<br>
 • Developed Azure CI/CD pipelines for deployment automation<br>
 • Built Power Automate workflows for document processing<br>
 • Integrated SharePoint for enterprise content management<br>
-• Ensured security compliance for document workflows
-</p>
+• Ensured security compliance for enterprise workflows<br>
 
-<p><b>Tech Stack:</b> .NET Core, React JS, Azure Cloud, Power Automate, SharePoint, Azure DevOps</p>
+<br><b>Tech Stack:</b> .NET Core, React JS, Azure Cloud, Power Automate, SharePoint, Azure DevOps
+</div>
 </div>
 
-<div class="card cleargrc">
+<!-- CLEARGRC -->
+<div class="timeline-item">
+<div class="card">
 <b>Ana Data Consulting Pvt. Ltd.</b><br>
 .NET Developer (Oct 2021 – Apr 2023)
 
-<p><b>Project: ClearGRC (Risk & Compliance Platform)</b></p>
+<br><br>
+<b>Project: ClearGRC (Risk & Compliance Platform)</b>
+
 <p>
-ClearGRC is a governance, risk, and compliance system designed for enterprise policy management and audits.
+ClearGRC is a governance, risk, and compliance system designed for enterprise policy management,
+audit tracking, and regulatory compliance reporting.
 </p>
 
-<p><b>Responsibilities:</b></p>
-<p>
+<br><b>Responsibilities:</b><br>
 • Designed backend using Domain Driven Design (DDD)<br>
 • Implemented CQRS architecture for read/write separation<br>
 • Developed authentication using IdentityServer4<br>
 • Built analytics dashboards using DevExtreme & HighCharts<br>
 • Optimized LINQ queries for large datasets<br>
 • Developed REST APIs for enterprise integrations<br>
-• Improved system performance and scalability
-</p>
+• Improved system performance and scalability<br>
 
-<p><b>Tech Stack:</b> .NET Core 5, Web API, Vue JS, SQL Server (Azure), IdentityServer4, DevExtreme, HighCharts</p>
+<br><b>Tech Stack:</b> .NET Core 5, Web API, Vue JS, SQL Server (Azure), IdentityServer4, DevExtreme, HighCharts
+</div>
 </div>
 
-<div class="card sisl">
+<!-- SISL -->
+<div class="timeline-item">
+<div class="card">
 <b>SISL Infotech</b><br>
 .NET Developer (Jan 2019 – Feb 2021)
 
-<p><b>Projects: PONGROW & EODB</b></p>
+<br><br>
+<b>Projects: PONGROW & EODB</b>
+
 <p>
-Government web portal systems designed for transactional workflows and centralized reporting.
+Government web portal systems designed for transactional workflows, financial operations,
+and centralized reporting systems.
 </p>
 
-<p><b>Responsibilities:</b></p>
-<p>
+<br><b>Responsibilities:</b><br>
 • Built ASP.NET MVC full-stack applications<br>
 • Designed SQL Server schema and stored procedures<br>
-• Integrated payment gateway systems (government finance portals)<br>
+• Integrated payment gateway systems for government portals<br>
 • Handled production deployment and maintenance<br>
 • Performed requirement analysis and system design<br>
-• Developed reusable UI components using jQuery and JavaScript<br>
-• Supported live production environments
-</p>
+• Developed reusable UI components using JavaScript & jQuery<br>
+• Supported live production environments<br>
 
-<p><b>Tech Stack:</b> ASP.NET MVC, C#, ADO.NET, SQL Server, JavaScript, jQuery, HTML5, CSS3</p>
+<br><b>Tech Stack:</b> ASP.NET MVC, C#, ADO.NET, SQL Server, JavaScript, jQuery, HTML5, CSS3
+</div>
 </div>
 
+</div>
 </section>
 
 <!-- SKILLS -->
@@ -287,9 +319,13 @@ Government web portal systems designed for transactional workflows and centraliz
 
 <div class="card">
 <b>Backend:</b> C#, .NET Core, Web API, Entity Framework, ADO.NET<br><br>
+
 <b>Frontend:</b> Angular, React, Vue JS, JavaScript, jQuery<br><br>
-<b>Architecture:</b> DDD, CQRS, Microservices, Design Patterns<br><br>
-<b>Cloud:</b> Azure, DevOps, Power Automate, SharePoint<br><br>
+
+<b>Architecture:</b> DDD, CQRS, Microservices, Clean Architecture<br><br>
+
+<b>Cloud:</b> Azure, DevOps, CI/CD, Power Automate, SharePoint<br><br>
+
 <b>Database:</b> SQL Server, Stored Procedures, Query Optimization
 </div>
 
@@ -298,7 +334,6 @@ Government web portal systems designed for transactional workflows and centraliz
 <!-- EDUCATION -->
 <section>
 <h2>Education</h2>
-
 <div class="card">
 B.Tech – Sri Venkateshwaraa College of Engineering and Technology (2018)
 </div>
@@ -307,11 +342,90 @@ B.Tech – Sri Venkateshwaraa College of Engineering and Technology (2018)
 </div>
 
 <script>
-const glow=document.getElementById("glow");
-
+/* cursor glow */
+const glow = document.getElementById("glow");
 document.addEventListener("mousemove",(e)=>{
-  glow.style.left=e.clientX+"px";
-  glow.style.top=e.clientY+"px";
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+
+/* neural network background */
+const canvas = document.getElementById("network");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+const count = 95;
+
+class Particle{
+  constructor(){
+    this.x = Math.random()*canvas.width;
+    this.y = Math.random()*canvas.height;
+    this.vx = (Math.random()-0.5)*0.6;
+    this.vy = (Math.random()-0.5)*0.6;
+    this.size = 2;
+  }
+
+  move(){
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if(this.x<0||this.x>canvas.width) this.vx*=-1;
+    if(this.y<0||this.y>canvas.height) this.vy*=-1;
+  }
+
+  draw(){
+    ctx.fillStyle="rgba(110,231,255,0.7)";
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function connect(){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i;j<particles.length;j++){
+      let dx=particles[i].x-particles[j].x;
+      let dy=particles[i].y-particles[j].y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+
+      if(dist<120){
+        ctx.strokeStyle="rgba(167,139,250,0.12)";
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function init(){
+  particles=[];
+  for(let i=0;i<count;i++) particles.push(new Particle());
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    p.move();
+    p.draw();
+  });
+
+  connect();
+  requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener("resize",()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  init();
 });
 </script>
 
