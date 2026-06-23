@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Magendra Varman | Hologram Portfolio</title>
+<title>Hologram Portfolio | Magendra Varman</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -18,21 +18,30 @@
   --c2:#a78bfa;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter;
+}
 
 body{
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
+  overflow-y:auto;
 }
 
-#network{
+/* ===== BACKGROUND LAYERS ===== */
+canvas{
   position:fixed;
   inset:0;
-  z-index:0;
-  opacity:0.25;
 }
 
+#network{z-index:0; opacity:0.25;}
+#particles{z-index:1; opacity:0.4;}
+
+/* SCANLINES */
 body::after{
   content:"";
   position:fixed;
@@ -44,10 +53,27 @@ body::after{
     transparent 3px,
     transparent 6px
   );
+  z-index:2;
   pointer-events:none;
-  z-index:1;
 }
 
+/* ENERGY SWEEP */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-50%;
+  background:linear-gradient(120deg, transparent, rgba(110,231,255,0.05), transparent);
+  transform:rotate(25deg);
+  animation:sweep 8s linear infinite;
+  z-index:2;
+}
+
+@keyframes sweep{
+  0%{transform:translateX(-30%) rotate(25deg);}
+  100%{transform:translateX(30%) rotate(25deg);}
+}
+
+/* CURSOR GLOW */
 .glow{
   position:fixed;
   width:450px;
@@ -57,19 +83,62 @@ body::after{
   filter:blur(60px);
   transform:translate(-50%,-50%);
   pointer-events:none;
-  z-index:2;
+  z-index:3;
 }
 
+/* HUD RING */
+.hud-ring{
+  position:fixed;
+  top:50%;
+  left:50%;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  border:1px solid rgba(110,231,255,0.12);
+  transform:translate(-50%,-50%);
+  z-index:1;
+  animation:ring 18s linear infinite;
+}
+
+.hud-ring::before{
+  content:"";
+  position:absolute;
+  inset:30px;
+  border-radius:50%;
+  border:1px dashed rgba(167,139,250,0.15);
+}
+
+@keyframes ring{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* ===== MAIN UI ===== */
 .container{
   position:relative;
-  z-index:3;
+  z-index:4;
   max-width:1100px;
   margin:auto;
-  padding:80px 20px;
-  perspective:1000px;
+  padding:120px 20px;
+  perspective:1200px;
 }
 
-section{margin-bottom:80px;}
+section{
+  margin-bottom:120px;
+  transform-style:preserve-3d;
+  transition:0.4s ease;
+}
+
+/* card */
+.card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+  margin-top:16px;
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(110,231,255,0.08);
+}
 
 h1{
   font-size:3.6rem;
@@ -83,21 +152,9 @@ h2{
   margin-bottom:12px;
 }
 
-p{color:var(--muted);line-height:1.7;}
-
-.card{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  margin-top:16px;
-  backdrop-filter:blur(18px);
-  transition:0.2s;
-  box-shadow:0 0 40px rgba(110,231,255,0.08);
-}
-
-.card:hover{
-  box-shadow:0 0 60px rgba(110,231,255,0.18);
+p{
+  color:var(--muted);
+  line-height:1.7;
 }
 
 .tag{
@@ -116,70 +173,66 @@ p{color:var(--muted);line-height:1.7;}
 <body>
 
 <canvas id="network"></canvas>
+<canvas id="particles"></canvas>
+
 <div class="glow" id="glow"></div>
+<div class="hud-ring"></div>
 
 <div class="container">
 
-<!-- HERO -->
 <section>
   <h1>Magendra Varman</h1>
-  <p>Senior Software Engineer • .NET Core • Angular • Azure • System Architecture</p>
+  <p>Senior Software Engineer • .NET Core • Angular • Azure</p>
 
-  <div class="card tilt">
-    6+ years of experience designing enterprise-grade distributed systems, financial platforms, and scalable cloud applications.
+  <div class="card">
+    6+ years building scalable enterprise systems, financial engines, and cloud-native architectures.
     <div class="tag">DDD • CQRS • Microservices • Azure</div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section>
 <h2>About</h2>
-<div class="card tilt">
-Specialized in backend architecture and enterprise application design using Microsoft stack.
+<div class="card">
+Specialized in backend systems, distributed architecture, and cloud solutions.
 
 <br><br>
-Experienced in building:
-<br>• Secure REST APIs
-<br>• High-performance backend systems
-<br>• Cloud-native applications on Azure
-<br>• Database optimization & large-scale systems
-
-<br><br>
-Focus is on clean architecture, scalability, and production-ready systems.
+Focus areas:
+• Secure APIs<br>
+• Microservices design<br>
+• Azure cloud systems<br>
+• High-performance backend systems
 </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section>
 <h2>Experience</h2>
 
-<div class="card tilt">
+<div class="card">
 <b>VBAM – Investment Engine</b><br>
-High-volume financial transaction system handling end-to-end investment lifecycle processing with audit-level tracking and reconciliation workflows.
+Financial transaction system with real-time processing and audit tracking.
 </div>
 
-<div class="card tilt">
+<div class="card">
 <b>ChemPoint – Document Platform</b><br>
-Enterprise document automation system with microservices architecture, OAuth security, and Azure CI/CD deployment pipelines.
+Microservices + Azure CI/CD enterprise automation system.
 </div>
 
-<div class="card tilt">
+<div class="card">
 <b>ClearGRC – Compliance Platform</b><br>
-Risk & governance system built using DDD + CQRS for compliance tracking, reporting, and enterprise audit management.
+DDD + CQRS based governance and risk system.
 </div>
 
-<div class="card tilt">
+<div class="card">
 <b>SISL – Government Systems</b><br>
-Large-scale government applications handling transactional workflows, payment integration, and reporting systems.
+Large-scale transactional government platforms.
 </div>
 
 </section>
 
-<!-- SKILLS -->
 <section>
 <h2>Skills</h2>
-<div class="card tilt">
-.NET Core • Web API • Angular • React • Azure Cloud • SQL Server • Microservices • DDD • CQRS • REST APIs • CI/CD
+<div class="card">
+.NET Core • Web API • Angular • React • Azure • SQL Server • Microservices • DDD • CQRS
 </div>
 </section>
 
@@ -187,32 +240,34 @@ Large-scale government applications handling transactional workflows, payment in
 
 <script>
 
-/* glow */
+/* ===== CURSOR GLOW ===== */
 const glow=document.getElementById("glow");
 document.addEventListener("mousemove",(e)=>{
   glow.style.left=e.clientX+"px";
   glow.style.top=e.clientY+"px";
 });
 
-/* tilt */
-document.querySelectorAll(".tilt").forEach(card=>{
-  card.addEventListener("mousemove",(e)=>{
-    const r=card.getBoundingClientRect();
-    const x=e.clientX-r.left;
-    const y=e.clientY-r.top;
+/* ===== SCROLL 3D CAMERA EFFECT ===== */
+const sections=document.querySelectorAll("section");
 
-    const rx=(y/r.height-0.5)*-10;
-    const ry=(x/r.width-0.5)*10;
+window.addEventListener("scroll",()=>{
+  const scrollY=window.scrollY;
 
-    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
-  });
+  sections.forEach(sec=>{
+    const offset=sec.offsetTop;
+    const diff=scrollY-offset;
 
-  card.addEventListener("mouseleave",()=>{
-    card.style.transform="rotateX(0) rotateY(0)";
+    sec.style.transform=`
+      translateZ(${diff * -0.08}px)
+      rotateX(${diff * 0.03}deg)
+      scale(${1 - Math.min(Math.abs(diff)/2000,0.15)})
+    `;
+
+    sec.style.opacity=1 - Math.min(Math.abs(diff)/700,0.7);
   });
 });
 
-/* background */
+/* ===== BACKGROUND NETWORK ===== */
 const canvas=document.getElementById("network");
 const ctx=canvas.getContext("2d");
 
@@ -276,10 +331,62 @@ function animate(){
 init();
 animate();
 
+/* ===== PARTICLES LAYER ===== */
+const pCanvas=document.getElementById("particles");
+const pCtx=pCanvas.getContext("2d");
+
+pCanvas.width=innerWidth;
+pCanvas.height=innerHeight;
+
+let dots=[];
+const dcount=60;
+
+class D{
+  constructor(){
+    this.x=Math.random()*pCanvas.width;
+    this.y=Math.random()*pCanvas.height;
+    this.vx=(Math.random()-0.5)*1.2;
+    this.vy=(Math.random()-0.5)*1.2;
+    this.r=Math.random()*2;
+  }
+  move(){
+    this.x+=this.vx;
+    this.y+=this.vy;
+    if(this.x<0||this.x>pCanvas.width) this.vx*=-1;
+    if(this.y<0||this.y>pCanvas.height) this.vy*=-1;
+  }
+  draw(){
+    pCtx.fillStyle="rgba(110,231,255,0.7)";
+    pCtx.shadowBlur=10;
+    pCtx.shadowColor="#6ee7ff";
+    pCtx.beginPath();
+    pCtx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    pCtx.fill();
+  }
+}
+
+function initDots(){
+  dots=[];
+  for(let i=0;i<dcount;i++) dots.push(new D());
+}
+
+function animateDots(){
+  pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+  dots.forEach(d=>{d.move();d.draw();});
+  requestAnimationFrame(animateDots);
+}
+
+initDots();
+animateDots();
+
+/* resize */
 window.addEventListener("resize",()=>{
   canvas.width=innerWidth;
+  pCanvas.width=innerWidth;
   canvas.height=innerHeight;
+  pCanvas.height=innerHeight;
   init();
+  initDots();
 });
 
 </script>
