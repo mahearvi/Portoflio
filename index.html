@@ -3,490 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magendra Varman | Senior Software Engineer</title>
-<!-- Professional Inter & Fira Code Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>Magendra Varman | AI Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ================= SYSTEM DESIGN SYSTEM ================= */
-:root {
-  --primary: #4f46e5;       /* Deep Indigo */
-  --primary-light: #e0e7ff; 
-  --secondary: #10b981;     /* Vibrant Emerald Accent */
-  --text-dark: #1e293b;     /* Deep Slate */
-  --text-light: #64748b;    /* Muted Gray-Blue */
-  --bg-main: #f8fafc;       /* Clean Off-White */
-  --bg-card: #ffffff;
-  --border: #e2e8f0;
+:root{
+  --bg:#050814;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.1);
+
+  --c1:#6ee7ff;
+  --c2:#a78bfa;
+  --c3:#34d399;
+  --c4:#f472b6;
+  --c5:#fbbf24;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-body {
-  background-color: var(--bg-main);
-  color: var(--text-dark);
-  line-height: 1.6;
-  padding: 0;
+/* ===== COLORFUL AI BACKGROUND ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(110,231,255,0.10), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(167,139,250,0.10), transparent 40%),
+    radial-gradient(circle at 50% 70%, rgba(244,114,182,0.08), transparent 45%),
+    radial-gradient(circle at 70% 90%, rgba(52,211,153,0.08), transparent 45%),
+    radial-gradient(circle at 30% 90%, rgba(251,191,36,0.06), transparent 45%);
+  filter:blur(45px);
+  z-index:0;
 }
 
-/* ================= LAYOUT CONTAINER ================= */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
+/* grid overlay */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:90px 90px;
+  opacity:0.08;
+  z-index:0;
 }
 
-/* ================= HERO HEADER ================= */
-.hero {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  color: #ffffff;
-  padding: 5rem 0;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 4px solid var(--secondary);
+/* cursor glow */
+.glow{
+  position:fixed;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle, rgba(110,231,255,0.15), transparent 60%);
+  filter:blur(50px);
+  transform:translate(-50%,-50%);
+  z-index:1;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
-  pointer-events: none;
+/* container */
+.container{
+  position:relative;
+  z-index:2;
+  max-width:950px;
+  margin:auto;
+  padding:70px 20px;
 }
 
-.hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  margin-bottom: 0.5rem;
+/* sections */
+section{
+  margin-bottom:55px;
 }
 
-.hero .title-sub {
-  font-size: 1.25rem;
-  color: #a5b4fc;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
+/* headings */
+h1{
+  font-size:3.2rem;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4),var(--c5));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-.contact-bar {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  font-size: 0.95rem;
+h2{
+  font-size:1.6rem;
+  margin-bottom:12px;
+  color:var(--c1);
 }
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #e2e8f0;
+p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:0.95rem;
 }
 
-.contact-item span {
-  color: var(--secondary);
-  font-weight: 600;
+/* cards */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  margin-top:12px;
+  backdrop-filter:blur(12px);
+  transition:0.25s;
 }
 
-/* ================= SECTION STYLING ================= */
-.main-content {
-  padding: 4rem 0;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
+.card:hover{
+  transform:translateY(-4px);
+  border-color:transparent;
+  box-shadow:0 0 25px rgba(110,231,255,0.2);
 }
 
-@media (max-width: 858px) {
-  .main-content {
-    grid-template-columns: 1fr;
-  }
-}
+/* accent borders */
+.card.vbam{border-left:4px solid var(--c1);}
+.card.chempoint{border-left:4px solid var(--c2);}
+.card.cleargrc{border-left:4px solid var(--c4);}
+.card.sisl{border-left:4px solid var(--c5);}
 
-section {
-  margin-bottom: 3.5rem;
+/* tag */
+.tag{
+  display:inline-block;
+  margin-top:10px;
+  font-size:11px;
+  color:white;
+  padding:4px 10px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
 }
-
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--border);
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0;
-  width: 60px; height: 2px;
-  background-color: var(--primary);
-}
-
-/* ================= CARDS & CONTENT ================= */
-.summary-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-/* Timeline/Experience */
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.experience-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: 0 12px 12px 0;
-  padding: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.experience-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-}
-
-.job-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.job-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.company {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.duration {
-  font-size: 0.875rem;
-  background-color: var(--primary-light);
-  color: var(--primary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-weight: 600;
-}
-
-.project-tag {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--secondary);
-  background: #f0fdf4;
-  padding: 0.1rem 0.5rem;
-  border-radius: 4px;
-  margin: 0.5rem 0;
-  border: 1px solid #bbf7d0;
-}
-
-.job-desc {
-  color: var(--text-light);
-  font-size: 0.975rem;
-  margin-bottom: 1rem;
-}
-
-.responsibility-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.responsibility-list li {
-  position: relative;
-  padding-left: 1.25rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-}
-
-.responsibility-list li::before {
-  content: "•";
-  color: var(--secondary);
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-}
-
-.tech-stack-label {
-  font-size: 0.85rem;
-  font-family: 'Fira Code', monospace;
-  color: var(--primary);
-  margin-top: 1rem;
-  font-weight: 500;
-}
-
-/* ================= RIGHT SIDEBAR SKILLS ================= */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.skill-group {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.skill-group h3 {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-  color: var(--text-light);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.25rem;
-}
-
-.pill-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.pill {
-  font-size: 0.85rem;
-  background-color: #f1f5f9;
-  color: var(--text-dark);
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.pill:hover {
-  background-color: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-
-.edu-card h4 {
-  font-size: 1rem;
-  font-weight: 600;
-}
-.edu-card p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
 </style>
 </head>
+
 <body>
 
-  <!-- HERO SECTION -->
-  <header class="hero">
-    <div class="container">
-      <h1>M. MAGENDRA VARMAN</h1>
-      <div class="title-sub">Senior Software Engineer</div>
-      <div class="contact-bar">
-        <div class="contact-item"><span>✉</span> magendra363@gmail.com</div>
-        <div class="contact-item"><span>📞</span> +91 9360591919</div>
-        <div class="contact-item"><span>💼</span> 6+ Years Experience</div>
-      </div>
-    </div>
-  </header>
+<div class="bg"></div>
+<div class="glow" id="glow"></div>
 
-  <!-- MAIN BODY LAYOUT -->
-  <main class="container main-content">
-    
-    <!-- LEFT COLUMN: SUMMARY & EXPERIENCE -->
-    <div class="left-column">
-      
-      <!-- PROFESSIONAL SUMMARY -->
-      <section>
-        <h2 class="section-title">Professional Summary</h2>
-        <div class="summary-card">
-          <p style="color: var(--text-dark); font-size: 1.05rem; margin-bottom: 1rem;">
-            Highly motivated and process-driven Software Engineer with <strong>6 years</strong> of enterprise execution expertise in object-oriented design and development across the Microsoft ecosystem.
-          </p>
-          <p style="color: var(--text-light); font-size: 0.95rem;">
-            Versatile professional thriving both as an independent contributor and a highly collaborative team player. Proficient in crafting robust system architectures using MVC patterns, structural design practices (Singleton, Repository, IoC), domain-driven practices, and executing flawless delivery in Agile methodologies.
-          </p>
-        </div>
-      </section>
+<div class="container">
 
-      <!-- PROFESSIONAL EXPERIENCE -->
-      <section>
-        <h2 class="section-title">Execution History</h2>
-        <div class="timeline">
-          
-          <!-- JOB 1 -->
-          <div class="experience-card">
-            <div class="job-header">
-              <div>
-                <span class="job-title">Software Developer</span> 
-                <span class="company">@ Ana Data Consulting Pvt. Ltd.</span>
-              </div>
-              <span class="duration">May 2024 - Present</span>
-            </div>
-            <div class="project-tag">Project: VBAM</div>
-            <p class="job-desc">
-              VBAM is a comprehensive backend engine engineered to process transactions for global investment infrastructures. Ensures precise, high-performance execution of client instruments spanning end-to-end investment lifecycle management.
-            </p>
-            <ul class="responsibility-list">
-              <li>Engineered modular back-end workflows using modern .NET Core frameworks alongside clean API layers.</li>
-              <li>Designed and integrated dynamic frontend components using Angular web layers.</li>
-              <li>Developed robust transaction tracking and reconciliation modules inside SQL Server.</li>
-              <li>Handled centralized application state management processes using state management patterns.</li>
-            </ul>
-            <div class="tech-stack-label">Tech Stack: .NET Core 6, Web API, Angular.js, Redux, DevExpress, SQL, Power Automate, GitLab</div>
-          </div>
+<!-- HERO -->
+<section>
+<h1>Magendra Varman</h1>
+<p>Senior Software Engineer • .NET Core • Angular • Azure • System Architecture</p>
 
-          <!-- JOB 2 -->
-          <div class="experience-card">
-            <div class="job-header">
-              <div>
-                <span class="job-title">Senior Developer</span> 
-                <span class="company">@ Aspire System India Pvt. Ltd.</span>
-              </div>
-              <span class="duration">Apr 2023 - Apr 2024</span>
-            </div>
-            <div class="project-tag">Project: ChemPoint</div>
-            <p class="job-desc">
-              An enterprise application centered around high-security corporate documentation publishing pipelines, advanced content evaluation, and automated ticketing services.
-            </p>
-            <ul class="responsibility-list">
-              <li>Formulated secure document workflows by decoupling React frontends and linking them to .NET layers via OAuth 2.0 authentication protocols.</li>
-              <li>Built distributed Microservices to scale document management, asset ingestion, and publication.</li>
-              <li>Engineered streamlined automation processes leveraging cloud-connected Power Automate pipelines.</li>
-            </ul>
-            <div class="tech-stack-label">Tech Stack: .NET Core 6, React.js, Web API, SharePoint, Azure Cloud, Power Automate, Azure DevOps</div>
-          </div>
+<div class="card">
+6+ years of enterprise experience in designing scalable backend systems, financial engines,
+risk management platforms, and cloud-based distributed applications.
+<div class="tag">DDD • CQRS • Microservices • Azure • DevOps</div>
+</div>
+</section>
 
-          <!-- JOB 3 -->
-          <div class="experience-card">
-            <div class="job-header">
-              <div>
-                <span class="job-title">.Net Developer</span> 
-                <span class="company">@ Ana Data Consulting Pvt. Ltd.</span>
-              </div>
-              <span class="duration">Oct 2021 - Apr 2023</span>
-            </div>
-            <div class="project-tag">Project: ClearGRC</div>
-            <p class="job-desc">
-              A comprehensive risk management platform enabling organizations to centralize policies, manage complex corporate audits, perform automated risk assessments, and track regulatory standards.
-            </p>
-            <ul class="responsibility-list">
-              <li>Architected APIs following strict Domain-Driven Design (DDD) methodologies, integrating CQRS, Dependency Injection (IoC), and MediatR pipeline patterns.</li>
-              <li>Leveraged specialized LINQ querying workflows to process, filter, and sort deeply nested relational object sets efficiently.</li>
-              <li>Implemented interactive analytics charts and advanced file generation utilizing HighCharts and OpenXML.</li>
-            </ul>
-            <div class="tech-stack-label">Tech Stack: .NET Core 5, Web API, Identity Server4, Vue.js, SQL Server (Azure Cloud), DevExtreme, HighCharts, OpenXML</div>
-          </div>
+<!-- SUMMARY -->
+<section>
+<h2>Professional Summary</h2>
+<div class="card">
+Highly motivated Software Engineer with strong expertise in Microsoft technology stack.
 
-          <!-- JOB 4 -->
-          <div class="experience-card">
-            <div class="job-header">
-              <div>
-                <span class="job-title">.Net Developer</span> 
-                <span class="company">@ SISL Infotech</span>
-              </div>
-              <span class="duration">Jan 2019 - Feb 2021</span>
-            </div>
-            <div class="project-tag">Projects: PONGROW & EODB</div>
-            <p class="job-desc">
-              Web application portals engineered to deliver transactional tools and centralized performance tracking features for e-governance systems.
-            </p>
-            <ul class="responsibility-list">
-              <li>Conducted complete requirement analysis, data normalization, database schema design, and production server deployments.</li>
-              <li>Authored highly-optimized Stored Procedures and structured views within SQL Server environments.</li>
-              <li>Integrated payment gateways securely with foundational financial settlement portals (PAYGOV / E-Gras).</li>
-            </ul>
-            <div class="tech-stack-label">Tech Stack: ASP.NET MVC, C#, ADO.NET, SQL Server, JavaScript, jQuery, HTML5, CSS3, Production Servers</div>
-          </div>
+Experienced in designing enterprise-grade applications using:
 
-        </div>
-      </section>
-    </div>
+• Domain Driven Design (DDD)  
+• CQRS Architecture  
+• Repository Pattern  
+• Dependency Injection  
+• Microservices  
 
-    <!-- RIGHT COLUMN: SIDEBAR METRICS & SKILLS -->
-    <div class="sidebar">
-      
-      <!-- CORE TECHNOLOGIES -->
-      <div class="skill-group">
-        <h3>Backend & Languages</h3>
-        <div class="pill-container">
-          <div class="pill">C#</div>
-          <div class="pill">Java</div>
-          <div class="pill">.NET Core 6.0</div>
-          <div class="pill">ASP.NET MVC</div>
-          <div class="pill">Web API / REST</div>
-          <div class="pill">Entity Framework</div>
-          <div class="pill">ADO.NET</div>
-        </div>
-      </div>
+Strong experience in:
+• Backend system architecture  
+• REST API development  
+• Cloud deployment (Azure)  
+• Performance tuning  
+• Scalable distributed systems  
+</div>
+</section>
 
-      <!-- FRONTEND TECHNOLOGIES -->
-      <div class="skill-group">
-        <h3>Frontend Web Stack</h3>
-        <div class="pill-container">
-          <div class="pill">React JS</div>
-          <div class="pill">Angular</div>
-          <div class="pill">Vue JS</div>
-          <div class="pill">JavaScript</div>
-          <div class="pill">jQuery</div>
-          <div class="pill">HTML5 / CSS3</div>
-          <div class="pill">DevExtreme / DevExpress</div>
-        </div>
-      </div>
+<!-- EXPERIENCE -->
+<section>
+<h2>Professional Experience</h2>
 
-      <!-- DATA & ARCHITECTURE -->
-      <div class="skill-group">
-        <h3>Architecture & Databases</h3>
-        <div class="pill-container">
-          <div class="pill">MS SQL Server</div>
-          <div class="pill">CQRS & MediatR</div>
-          <div class="pill">Domain Driven Design (DDD)</div>
-          <div class="pill">Design Patterns</div>
-          <div class="pill">OAuth 2.0 / IdentityServer</div>
-        </div>
-      </div>
+<div class="card vbam">
+<b>VBAM – Ana Data Consulting Pvt. Ltd.</b><br>
+Software Developer (May 2024 – Present)
 
-      <!-- CLOUD & TOOLS -->
-      <div class="skill-group">
-        <h3>Cloud & Automation</h3>
-        <div class="pill-container">
-          <div class="pill">Azure Cloud</div>
-          <div class="pill">Power Automate</div>
-          <div class="pill">SharePoint</div>
-          <div class="pill">GitLab / TFS / VSS</div>
-        </div>
-      </div>
+<p><b>Project: VBAM (Investment Transaction Engine)</b></p>
+<p>
+VBAM is a high-performance enterprise financial transaction engine used in global investment systems.
+It processes end-to-end lifecycle transactions with accuracy, scalability, and audit-level tracking.
+</p>
 
-      <!-- EDUCATION -->
-      <div class="skill-group">
-        <h3>Education</h3>
-        <div class="edu-card">
-          <h4>Bachelor of Technology (B.Tech)</h4>
-          <p>Graduated: 2018</p>
-          <p style="font-size: 0.85rem; margin-top: 0.25rem;">Sri Venkateshwaraa College of Engineering and Technology</p>
-        </div>
-      </div>
+<p><b>Responsibilities:</b></p>
+<p>
+• Designed scalable REST APIs using .NET Core Web API<br>
+• Developed Angular-based dynamic UI modules<br>
+• Built SQL Server procedures for reconciliation & reporting<br>
+• Implemented state management architecture for enterprise workflows<br>
+• Optimized backend queries for high-volume transaction processing<br>
+• Integrated logging and monitoring for production systems<br>
+• Worked in Agile sprint-based delivery model
+</p>
 
-    </div>
-  </main>
+<p><b>Tech Stack:</b> .NET Core 6, Web API, Angular, Redux, SQL Server, DevExpress, GitLab</p>
+</div>
+
+<div class="card chempoint">
+<b>Aspire System India Pvt. Ltd.</b><br>
+Senior Developer (Apr 2023 – Apr 2024)
+
+<p><b>Project: ChemPoint (Enterprise Document Platform)</b></p>
+<p>
+ChemPoint is a secure enterprise document automation system designed for large-scale publishing workflows.
+</p>
+
+<p><b>Responsibilities:</b></p>
+<p>
+• Designed microservices-based architecture for document processing<br>
+• Integrated React frontend with backend .NET Core APIs<br>
+• Implemented OAuth 2.0 authentication & authorization system<br>
+• Developed Azure CI/CD pipelines for deployment automation<br>
+• Built Power Automate workflows for document processing<br>
+• Integrated SharePoint for enterprise content management<br>
+• Ensured security compliance for document workflows
+</p>
+
+<p><b>Tech Stack:</b> .NET Core, React JS, Azure Cloud, Power Automate, SharePoint, Azure DevOps</p>
+</div>
+
+<div class="card cleargrc">
+<b>Ana Data Consulting Pvt. Ltd.</b><br>
+.NET Developer (Oct 2021 – Apr 2023)
+
+<p><b>Project: ClearGRC (Risk & Compliance Platform)</b></p>
+<p>
+ClearGRC is a governance, risk, and compliance system designed for enterprise policy management and audits.
+</p>
+
+<p><b>Responsibilities:</b></p>
+<p>
+• Designed backend using Domain Driven Design (DDD)<br>
+• Implemented CQRS architecture for read/write separation<br>
+• Developed authentication using IdentityServer4<br>
+• Built analytics dashboards using DevExtreme & HighCharts<br>
+• Optimized LINQ queries for large datasets<br>
+• Developed REST APIs for enterprise integrations<br>
+• Improved system performance and scalability
+</p>
+
+<p><b>Tech Stack:</b> .NET Core 5, Web API, Vue JS, SQL Server (Azure), IdentityServer4, DevExtreme, HighCharts</p>
+</div>
+
+<div class="card sisl">
+<b>SISL Infotech</b><br>
+.NET Developer (Jan 2019 – Feb 2021)
+
+<p><b>Projects: PONGROW & EODB</b></p>
+<p>
+Government web portal systems designed for transactional workflows and centralized reporting.
+</p>
+
+<p><b>Responsibilities:</b></p>
+<p>
+• Built ASP.NET MVC full-stack applications<br>
+• Designed SQL Server schema and stored procedures<br>
+• Integrated payment gateway systems (government finance portals)<br>
+• Handled production deployment and maintenance<br>
+• Performed requirement analysis and system design<br>
+• Developed reusable UI components using jQuery and JavaScript<br>
+• Supported live production environments
+</p>
+
+<p><b>Tech Stack:</b> ASP.NET MVC, C#, ADO.NET, SQL Server, JavaScript, jQuery, HTML5, CSS3</p>
+</div>
+
+</section>
+
+<!-- SKILLS -->
+<section>
+<h2>Technical Skills</h2>
+
+<div class="card">
+<b>Backend:</b> C#, .NET Core, Web API, Entity Framework, ADO.NET<br><br>
+<b>Frontend:</b> Angular, React, Vue JS, JavaScript, jQuery<br><br>
+<b>Architecture:</b> DDD, CQRS, Microservices, Design Patterns<br><br>
+<b>Cloud:</b> Azure, DevOps, Power Automate, SharePoint<br><br>
+<b>Database:</b> SQL Server, Stored Procedures, Query Optimization
+</div>
+
+</section>
+
+<!-- EDUCATION -->
+<section>
+<h2>Education</h2>
+
+<div class="card">
+B.Tech – Sri Venkateshwaraa College of Engineering and Technology (2018)
+</div>
+</section>
+
+</div>
+
+<script>
+const glow=document.getElementById("glow");
+
+document.addEventListener("mousemove",(e)=>{
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
+});
+</script>
 
 </body>
 </html>
