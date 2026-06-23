@@ -3,390 +3,263 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hologram Portfolio | Magendra Varman</title>
+<title>Space Portfolio | Magendra</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#050814;
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --glass: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.12);
-  --c1:#6ee7ff;
-  --c2:#a78bfa;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter;
-}
-
 body{
-  background:var(--bg);
-  color:var(--text);
+  margin:0;
   overflow-x:hidden;
-  overflow-y:auto;
+  font-family:Inter;
+  background:#02030a;
+  color:#e5e7eb;
 }
 
-/* ===== BACKGROUND LAYERS ===== */
+/* SPACE BACKGROUND */
 canvas{
   position:fixed;
   inset:0;
+  z-index:0;
 }
 
-#network{z-index:0; opacity:0.25;}
-#particles{z-index:1; opacity:0.4;}
-
-/* SCANLINES */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.03),
-    rgba(255,255,255,0.03) 1px,
-    transparent 3px,
-    transparent 6px
-  );
-  z-index:2;
-  pointer-events:none;
-}
-
-/* ENERGY SWEEP */
+/* DARK DEPTH LAYER */
 body::before{
   content:"";
   position:fixed;
-  inset:-50%;
-  background:linear-gradient(120deg, transparent, rgba(110,231,255,0.05), transparent);
-  transform:rotate(25deg);
-  animation:sweep 8s linear infinite;
-  z-index:2;
-}
-
-@keyframes sweep{
-  0%{transform:translateX(-30%) rotate(25deg);}
-  100%{transform:translateX(30%) rotate(25deg);}
-}
-
-/* CURSOR GLOW */
-.glow{
-  position:fixed;
-  width:450px;
-  height:450px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(110,231,255,0.25), transparent 60%);
-  filter:blur(60px);
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  z-index:3;
-}
-
-/* HUD RING */
-.hud-ring{
-  position:fixed;
-  top:50%;
-  left:50%;
-  width:700px;
-  height:700px;
-  border-radius:50%;
-  border:1px solid rgba(110,231,255,0.12);
-  transform:translate(-50%,-50%);
+  inset:0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.35), rgba(0,0,0,0.92));
   z-index:1;
-  animation:ring 18s linear infinite;
 }
 
-.hud-ring::before{
-  content:"";
-  position:absolute;
-  inset:30px;
-  border-radius:50%;
-  border:1px dashed rgba(167,139,250,0.15);
-}
-
-@keyframes ring{
-  from{transform:translate(-50%,-50%) rotate(0deg);}
-  to{transform:translate(-50%,-50%) rotate(360deg);}
-}
-
-/* ===== MAIN UI ===== */
+/* UI */
 .container{
   position:relative;
-  z-index:4;
+  z-index:5;
   max-width:1100px;
   margin:auto;
   padding:120px 20px;
-  perspective:1200px;
 }
 
 section{
-  margin-bottom:120px;
-  transform-style:preserve-3d;
-  transition:0.4s ease;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* card */
-.card{
-  background:var(--glass);
-  border:1px solid var(--border);
+.panel{
+  width:85%;
+  padding:30px;
   border-radius:18px;
-  padding:22px;
-  margin-top:16px;
+  background:rgba(10,12,20,0.55);
+  border:1px solid rgba(255,255,255,0.1);
   backdrop-filter:blur(18px);
-  box-shadow:0 0 40px rgba(110,231,255,0.08);
+  box-shadow:0 0 60px rgba(0,0,0,0.7);
 }
 
 h1{
-  font-size:3.6rem;
-  background:linear-gradient(90deg,var(--c1),var(--c2));
+  font-size:3.4rem;
+  background:linear-gradient(90deg,#6ee7ff,#a78bfa);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 h2{
-  color:var(--c1);
-  margin-bottom:12px;
+  color:#6ee7ff;
+  margin-bottom:10px;
 }
 
 p{
-  color:var(--muted);
+  color:#d1d5db;
   line-height:1.7;
 }
 
+/* GRID STYLE BLOCKS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.box{
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* TAG */
 .tag{
   display:inline-block;
-  margin-top:10px;
-  padding:5px 10px;
+  margin-top:12px;
+  padding:6px 12px;
   border-radius:20px;
-  font-size:11px;
-  background:linear-gradient(90deg,var(--c1),var(--c2));
-  color:#000;
+  background:linear-gradient(90deg,#6ee7ff,#a78bfa);
+  color:black;
   font-weight:600;
+}
+
+/* PROJECT CARD */
+.project{
+  margin-top:12px;
+  padding:15px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border-left:3px solid #6ee7ff;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="network"></canvas>
-<canvas id="particles"></canvas>
-
-<div class="glow" id="glow"></div>
-<div class="hud-ring"></div>
+<canvas id="space"></canvas>
+<body::before></body::before>
 
 <div class="container">
 
+<!-- HERO -->
 <section>
-  <h1>Magendra Varman</h1>
-  <p>Senior Software Engineer • .NET Core • Angular • Azure</p>
-
-  <div class="card">
-    6+ years building scalable enterprise systems, financial engines, and cloud-native architectures.
-    <div class="tag">DDD • CQRS • Microservices • Azure</div>
+  <div class="panel">
+    <h1>Magendra Varman</h1>
+    <p>Senior Software Engineer • .NET Core • Angular • Azure • System Architect</p>
+    <div class="tag">HYPERSPACE ENGINE ACTIVE</div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section>
-<h2>About</h2>
-<div class="card">
-Specialized in backend systems, distributed architecture, and cloud solutions.
+  <div class="panel">
+    <h2>About Me</h2>
+    <p>
+      Software Engineer with 6+ years of experience building enterprise-grade systems,
+      financial engines, and distributed cloud platforms.
+    </p>
 
-<br><br>
-Focus areas:
-• Secure APIs<br>
-• Microservices design<br>
-• Azure cloud systems<br>
-• High-performance backend systems
-</div>
+    <p>
+      Strong focus on system design, scalable architecture, and backend performance optimization.
+      Experienced in building mission-critical applications used in finance, compliance, and government domains.
+    </p>
+
+    <div class="grid">
+      <div class="box">🚀 Distributed Systems Expert</div>
+      <div class="box">☁ Azure Cloud Architect</div>
+      <div class="box">🧠 Backend Specialist</div>
+      <div class="box">⚙ System Design (DDD / CQRS)</div>
+    </div>
+  </div>
 </section>
 
+<!-- SKILLS -->
 <section>
-<h2>Experience</h2>
+  <div class="panel">
+    <h2>Skills Matrix</h2>
 
-<div class="card">
-<b>VBAM – Investment Engine</b><br>
-Financial transaction system with real-time processing and audit tracking.
-</div>
+    <div class="grid">
+      <div class="box">.NET Core / Web API</div>
+      <div class="box">Angular / React</div>
+      <div class="box">Azure / DevOps</div>
+      <div class="box">SQL Server / Optimization</div>
+      <div class="box">Microservices</div>
+      <div class="box">DDD / CQRS</div>
+      <div class="box">IdentityServer / Auth</div>
+      <div class="box">Power Automate / CI-CD</div>
+    </div>
 
-<div class="card">
-<b>ChemPoint – Document Platform</b><br>
-Microservices + Azure CI/CD enterprise automation system.
-</div>
-
-<div class="card">
-<b>ClearGRC – Compliance Platform</b><br>
-DDD + CQRS based governance and risk system.
-</div>
-
-<div class="card">
-<b>SISL – Government Systems</b><br>
-Large-scale transactional government platforms.
-</div>
-
+    <div class="tag">ENTERPRISE SYSTEM ENGINEERING</div>
+  </div>
 </section>
 
+<!-- PROJECTS -->
 <section>
-<h2>Skills</h2>
-<div class="card">
-.NET Core • Web API • Angular • React • Azure • SQL Server • Microservices • DDD • CQRS
-</div>
+  <div class="panel">
+    <h2>Projects (Mission Logs)</h2>
+
+    <div class="project">
+      <b>VBAM – Financial Transaction Engine</b>
+      <p>High-performance investment processing system handling real-time transactions with audit-grade accuracy.</p>
+    </div>
+
+    <div class="project">
+      <b>ChemPoint – Document Automation Platform</b>
+      <p>Enterprise microservices platform integrated with Azure CI/CD and document workflow automation.</p>
+    </div>
+
+    <div class="project">
+      <b>ClearGRC – Governance & Compliance System</b>
+      <p>Risk and compliance system built using DDD + CQRS with analytics dashboards and secure workflows.</p>
+    </div>
+
+    <div class="project">
+      <b>Government Portals (SISL)</b>
+      <p>Large-scale public service applications with payment integration and high-volume transaction handling.</p>
+    </div>
+
+    <div class="tag">ALL SYSTEMS OPERATIONAL</div>
+  </div>
 </section>
 
 </div>
 
 <script>
 
-/* ===== CURSOR GLOW ===== */
-const glow=document.getElementById("glow");
-document.addEventListener("mousemove",(e)=>{
-  glow.style.left=e.clientX+"px";
-  glow.style.top=e.clientY+"px";
-});
-
-/* ===== SCROLL 3D CAMERA EFFECT ===== */
-const sections=document.querySelectorAll("section");
-
-window.addEventListener("scroll",()=>{
-  const scrollY=window.scrollY;
-
-  sections.forEach(sec=>{
-    const offset=sec.offsetTop;
-    const diff=scrollY-offset;
-
-    sec.style.transform=`
-      translateZ(${diff * -0.08}px)
-      rotateX(${diff * 0.03}deg)
-      scale(${1 - Math.min(Math.abs(diff)/2000,0.15)})
-    `;
-
-    sec.style.opacity=1 - Math.min(Math.abs(diff)/700,0.7);
-  });
-});
-
-/* ===== BACKGROUND NETWORK ===== */
-const canvas=document.getElementById("network");
+/* STARFIELD */
+const canvas=document.getElementById("space");
 const ctx=canvas.getContext("2d");
 
 canvas.width=innerWidth;
 canvas.height=innerHeight;
 
-let particles=[];
-const count=80;
+let stars=[];
 
-class P{
-  constructor(){
-    this.x=Math.random()*canvas.width;
-    this.y=Math.random()*canvas.height;
-    this.vx=(Math.random()-0.5)*0.5;
-    this.vy=(Math.random()-0.5)*0.5;
-  }
-  move(){
-    this.x+=this.vx;
-    this.y+=this.vy;
-    if(this.x<0||this.x>canvas.width) this.vx*=-1;
-    if(this.y<0||this.y>canvas.height) this.vy*=-1;
-  }
-  draw(){
-    ctx.fillStyle="rgba(110,231,255,0.6)";
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,2,0,Math.PI*2);
-    ctx.fill();
-  }
+for(let i=0;i<350;i++){
+  stars.push({
+    x:(Math.random()-0.5)*canvas.width,
+    y:(Math.random()-0.5)*canvas.height,
+    z:Math.random()*canvas.width
+  });
 }
 
-function connect(){
-  for(let i=0;i<particles.length;i++){
-    for(let j=i;j<particles.length;j++){
-      let dx=particles[i].x-particles[j].x;
-      let dy=particles[i].y-particles[j].y;
-      let d=Math.sqrt(dx*dx+dy*dy);
-
-      if(d<120){
-        ctx.strokeStyle="rgba(167,139,250,0.12)";
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x,particles[i].y);
-        ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-function init(){
-  particles=[];
-  for(let i=0;i<count;i++) particles.push(new P());
-}
+let speed=2;
 
 function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{p.move();p.draw();});
-  connect();
+  ctx.fillStyle="rgba(0,0,0,0.35)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  for(let s of stars){
+    s.z-=speed;
+    if(s.z<=0) s.z=canvas.width;
+
+    let k=120/s.z;
+    let px=s.x*k+canvas.width/2;
+    let py=s.y*k+canvas.height/2;
+
+    let size=(1-s.z/canvas.width)*2.5;
+    let alpha=Math.max(0.15,1-s.z/canvas.width);
+
+    ctx.fillStyle=`rgba(110,231,255,${alpha})`;
+    ctx.shadowBlur=8;
+    ctx.shadowColor="#6ee7ff";
+
+    ctx.beginPath();
+    ctx.arc(px,py,size,0,Math.PI*2);
+    ctx.fill();
+  }
+
   requestAnimationFrame(animate);
 }
-
-init();
 animate();
 
-/* ===== PARTICLES LAYER ===== */
-const pCanvas=document.getElementById("particles");
-const pCtx=pCanvas.getContext("2d");
+/* SCROLL SPEED CONTROL */
+window.addEventListener("scroll",()=>{
+  const y=window.scrollY;
+  speed = 2 + y*0.02;
+});
 
-pCanvas.width=innerWidth;
-pCanvas.height=innerHeight;
-
-let dots=[];
-const dcount=60;
-
-class D{
-  constructor(){
-    this.x=Math.random()*pCanvas.width;
-    this.y=Math.random()*pCanvas.height;
-    this.vx=(Math.random()-0.5)*1.2;
-    this.vy=(Math.random()-0.5)*1.2;
-    this.r=Math.random()*2;
-  }
-  move(){
-    this.x+=this.vx;
-    this.y+=this.vy;
-    if(this.x<0||this.x>pCanvas.width) this.vx*=-1;
-    if(this.y<0||this.y>pCanvas.height) this.vy*=-1;
-  }
-  draw(){
-    pCtx.fillStyle="rgba(110,231,255,0.7)";
-    pCtx.shadowBlur=10;
-    pCtx.shadowColor="#6ee7ff";
-    pCtx.beginPath();
-    pCtx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    pCtx.fill();
-  }
-}
-
-function initDots(){
-  dots=[];
-  for(let i=0;i<dcount;i++) dots.push(new D());
-}
-
-function animateDots(){
-  pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
-  dots.forEach(d=>{d.move();d.draw();});
-  requestAnimationFrame(animateDots);
-}
-
-initDots();
-animateDots();
-
-/* resize */
 window.addEventListener("resize",()=>{
   canvas.width=innerWidth;
-  pCanvas.width=innerWidth;
   canvas.height=innerHeight;
-  pCanvas.height=innerHeight;
-  init();
-  initDots();
 });
 
 </script>
